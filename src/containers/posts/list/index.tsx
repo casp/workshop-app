@@ -1,18 +1,17 @@
-import React from 'react';
-import { Link } from "react-router-dom";
-import PostListItem from '../PostListItem';
-import { Table } from 'react-bootstrap';
-import { GetPosts } from '../../../services/posts/PostService';
+import React, { useContext } from 'react';
+import { Table, Button } from 'react-bootstrap';
+import { IPostContext } from '../../../contexts';
+import { PostContext } from '../../../contexts/posts/PostContext';
+import PostListItem from '../listItem';
 
 export const PostsList = () => {
-    const posts = GetPosts();
-
+    const { posts } = useContext<IPostContext>(PostContext);
     return (
         <>
         <div className="text-right">
-            <Link to={"/posts/add"} className="nav-link">Nuevo</Link>
+            <Button href={"/posts/add"} className="badge badge-success mr-2">Nuevo</Button>
         </div>        
-        <Table striped bordered hover>
+        <Table striped bordered hover size="sm">
             <thead>
                 <tr>
                     <th>Title</th>

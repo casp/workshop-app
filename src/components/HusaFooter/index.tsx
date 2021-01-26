@@ -1,8 +1,14 @@
 import React from 'react';
-import { HusaCopyright } from '../HusaCopyright';
+import { Row, Col } from 'react-bootstrap';
+import { HusaCopyright } from '../husaCopyright';
 
 export const HusaFooter = () => {
-    return (      
-        <HusaCopyright />
+    return (    
+        <Row>
+            <Col>
+                <HusaCopyright />
+            </Col>
+        </Row>  
+        
     );
 }

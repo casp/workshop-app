@@ -1,14 +1,15 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import { UserProps } from '../../../interfaces/UserProps';
-import { RemoveUser } from '../../../services/users/UserService';
+import { Remove } from '../../../services/GenericService';
+import { USER_URL } from '../../../resources';
 import { useHistory } from "react-router-dom";
 
 const UserListItem = (props: UserProps) => {
     const history = useHistory();
 
     const deleteUser = (row: number) => {
-        RemoveUser(row)
+        Remove(USER_URL, row)
         .then(response => {
             console.log(response.data);
             history.push("/users");

@@ -1,15 +1,16 @@
-import React from 'react';
-import { Link } from "react-router-dom";
+import React, { useContext } from 'react';
+import { Table, Button } from 'react-bootstrap';
+import { IUserContext } from '../../../contexts/users/IUserContext';
+import { UserContext } from '../../..//contexts/users/UserContext';
 import UserListItem from '../UserListItem';
-import { Table } from 'react-bootstrap';
-import { GetUsers } from '../../../services/users/UserService';
 
 export const UsersList = () => {
-    const users = GetUsers();
+    const { users } = useContext<IUserContext>(UserContext);
+
     return (
         <>
         <div className="text-right">
-            <Link to={"/users/add"} className="nav-link">Nuevo</Link>
+            <Button href={"/users/add"} className="badge badge-success mr-2">Nuevo</Button>
         </div>        
         <Table striped bordered hover>
             <thead>

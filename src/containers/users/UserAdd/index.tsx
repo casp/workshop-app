@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { Link } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { User } from '../../../models/User';
-import { CreateUser } from '../../../services/users/UserService';
-import { useHistory } from "react-router-dom";
+import { Create } from '../../../services/GenericService';
+import { USER_URL } from '../../../resources/';
 
 const initialValues: User = {  
   email: "",
@@ -26,7 +26,7 @@ export const UserAdd = () => {
     const newUser = (e: React.FormEvent<EventTarget>) => {
       e.preventDefault();
       
-      CreateUser(formData)
+      Create<User>(USER_URL, formData)
         .then(response => {
           history.push("/users");
         })
@@ -38,7 +38,7 @@ export const UserAdd = () => {
     return (
       <>
         <div className="text-right">
-          <Link to={"/users"} className="nav-link">Listado</Link>
+          <Button href={"/users"} className="badge badge-secondary mr-2">Listado</Button>
         </div>  
         <Form>
           <Form.Group controlId="formBasicEmail">

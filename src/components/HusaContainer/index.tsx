@@ -1,26 +1,20 @@
 import React from 'react';
-import { Container, Row, Col, Card } from 'react-bootstrap'
-import { HusaNavbar } from '../HusaNavbar/';
-import { HusaContent } from '../HusaContent/';
-import { HusaFooter } from '../HusaFooter/';
+import { Row, Col } from 'react-bootstrap';
+import HusaContent from '../husaContent';
+import { HusaSidebar } from '../husaSidebar';
+import { HusaRoutes } from '../husaRoutes';
 
 export const HusaContainer = () => {
-    return (
-      <Container fluid>
-        <HusaNavbar />
+    return (      
         <Row>
+          <Col xs={2}>
+            <HusaSidebar />
+          </Col>
           <Col>
-            <Card>
-            <Card.Header as="h4">
-              Workshop        
-            </Card.Header>            
-            <Card.Body>                 
-                <HusaContent />                                    
-            </Card.Body>
-        </Card>
+            <HusaContent >
+              <HusaRoutes />
+            </HusaContent>
           </Col>  
-        </Row>           
-        <HusaFooter />  
-      </Container>
+        </Row>    
     );
 }

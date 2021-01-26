@@ -1,14 +1,15 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import { PostProps } from '../../../interfaces/PostProps';
-import { RemovePost } from '../../../services/posts/PostService';
 import { useHistory } from "react-router-dom";
+import { Remove } from '../../../services/GenericService';
+import { POST_URL } from '../../../resources';
 
 const PostListItem = (props: PostProps) => {
     const history = useHistory();
 
     const deletePost = (row: number) => {
-        RemovePost(row)
+        Remove(POST_URL, row)
         .then(response => {
             history.push("/posts");
         })

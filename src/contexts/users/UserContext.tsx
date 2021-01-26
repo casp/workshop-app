@@ -1,19 +1,20 @@
 import React, { createContext } from 'react';
 import { IUserContext } from './IUserContext';
-import { GetUsers } from '../../services/users/UserService';
+import { User } from '../../models/User';
+import { GetAll } from '../../services/GenericService';
+import { USER_URL } from '../../resources';
 
 export const UserContext = createContext<IUserContext>({
-    users: [],
+  users: []
 });
 
 const UserProvider = (props: any) => {
-    const users = GetUsers();
-
-    return (
-        <UserContext.Provider value={{ users }}>
-            {props.children}
-        </UserContext.Provider>
-    )
+  const users = GetAll<User>(USER_URL).data;
+  return (
+    <UserContext.Provider value={{ users }}>
+      {props.children}
+    </UserContext.Provider>
+  )
 }
 
 export default UserProvider;

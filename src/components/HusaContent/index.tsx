@@ -1,24 +1,25 @@
-import React from 'react';
-import { Switch, Route } from "react-router-dom";
-import { UsersList } from '../../containers/users/UsersList';
-import { UserAdd } from '../../containers/users/UserAdd';
-import { UserUpdate} from '../../containers/users/UserUpdate';
-import { PostsList } from '../../containers/posts/PostList';
-import { PostAdd } from '../../containers/posts/PostAdd';
-import { PostUpdate } from '../../containers/posts/PostUpdate';
+import React, { useState, useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
+import { Card } from 'react-bootstrap';
 
-export const HusaContent = () => {
+const HusaContent = (props) => {
+    const [currentPath, setCurrentPath] = useState<string>('');
+
+    useEffect(() => {
+        const url = props.location.pathname.substr(1, props.location.pathname.length -1);
+        setCurrentPath(url);
+    }, [props.location.pathname])
 
     return (
-        <>        
-        <Switch>
-          <Route exact path={["/", "/users"]} component={UsersList} />
-          <Route exact path={"/users/add"} component={UserAdd} />
-          <Route exact path={"/users/update/:id"} component={UserUpdate} />
-          <Route exact path={"/posts"} component={PostsList} />
-          <Route exact path={"/posts/add"} component={PostAdd} />
-          <Route exact path={"/posts/update/:id"} component={PostUpdate} />
-        </Switch> 
-        </>
+        <Card>
+            <Card.Header as="h4">
+              {currentPath}       
+            </Card.Header>            
+            <Card.Body>                 
+                {props.children}                                 
+            </Card.Body>
+        </Card>    
     );
 }
+
+export default withRouter(HusaContent);

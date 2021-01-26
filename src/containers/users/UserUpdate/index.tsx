@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { Link } from "react-router-dom";
+import { useHistory, useParams, Link } from "react-router-dom";
 import { User } from '../../../models/User';
 import { UpdateUser, GetUserById } from '../../../services/users/UserService';
-import { useHistory, useParams } from "react-router-dom";
+import { GetById, Update } from '../../../services/GenericService';
+import { USER_URL } from '../../../resources';
 
 const initialValues: User = {  
   email: "",
@@ -15,15 +16,20 @@ const initialValues: User = {
 export const UserUpdate = () => {
     const history = useHistory();
     const { id } = useParams<number>();
-        
     const [formData, setFormData] = useState<User>(initialValues);
-    const user: User = GetUserById(id);
-
+    //const user: User = GetUserById(id);
+    const user: User = GetById<User>(USER_URL, id);
+ 
     useEffect(() => {
-      setFormData(user);
+      if(user !== undefined)
+      {
+        setFormData(user.data);
+      }
+      
     }, [user]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      e.preventDefault();
       setFormData({
         ...formData,
         [e.target.name]: e.target.value
@@ -33,7 +39,7 @@ export const UserUpdate = () => {
     const updateUser = (e: React.FormEvent<EventTarget>) => {
       e.preventDefault();
       
-      UpdateUser(formData)
+      Update<User>(USER_URL,formData)
         .then(response => {
           history.push("/users");
         })
@@ -47,7 +53,7 @@ export const UserUpdate = () => {
         { formData && (
           <>
             <div className="text-right">
-              <Link to={"/users"} className="nav-link">Listado</Link>
+              <Button href={"/users"} className="badge badge-secondary mr-2">Listado</Button>
             </div>
             <Form onSubmit={updateUser}>              
               <Form.Control type="hidden" name="id" value={formData.id} />

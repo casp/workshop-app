@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { Link } from "react-router-dom";
-import { Post } from '../../../models/Post';
-import { UpdatePost, GetPostById } from '../../../services/posts/PostService';
 import { useHistory, useParams } from "react-router-dom";
+import { Post } from '../../../models/Post';
+import { GetById, Update } from '../../../services/GenericService';
+import { POST_URL } from '../../../resources';
 
 const initialValues: Post = {  
   title: "",
@@ -13,11 +13,10 @@ const initialValues: Post = {
 
 export const PostUpdate = () => {
     const history = useHistory();
-    const { id } = useParams<number>();
-        
+    const { id } = useParams<number>();        
     const [formData, setFormData] = useState<Post>(initialValues);
-    const post: Post = GetPostById(id);
-    console.log(post);
+    const post: Post = GetById<Post>(POST_URL, id);
+    
     useEffect(() => {
       setFormData(post);
     }, [post]);
@@ -32,7 +31,7 @@ export const PostUpdate = () => {
     const updatePost = (e: React.FormEvent<EventTarget>) => {
       e.preventDefault();
       
-      UpdatePost(formData)
+      Update<Post>(POST_URL, formData)
         .then(response => {
           history.push("/posts");
         })
@@ -46,7 +45,7 @@ export const PostUpdate = () => {
         { formData && (
           <>
             <div className="text-right">
-              <Link to={"/posts"} className="nav-link">Listado</Link>
+              <Button href={"/posts"} className="badge badge-secondary mr-2">Listado</Button>
             </div>
             <Form onSubmit={updatePost}>              
               <Form.Control type="hidden" name="id" value={formData.id} />
