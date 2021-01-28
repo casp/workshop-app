@@ -9,7 +9,7 @@ export const HusaHeader = () => {
             {' '}            
           </Navbar.Brand>
           <Navbar.Text>
-            Sitio administrativo
+            Workshop
           </Navbar.Text>
           <Navbar.Collapse className="justify-content-end">                                 
               <Navbar.Text>

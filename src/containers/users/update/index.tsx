@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { useHistory, useParams, Link } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { User } from '../../../models/User';
-import { UpdateUser, GetUserById } from '../../../services/users/UserService';
 import { GetById, Update } from '../../../services/GenericService';
 import { USER_URL } from '../../../resources';
 
@@ -17,13 +16,12 @@ export const UserUpdate = () => {
     const history = useHistory();
     const { id } = useParams<number>();
     const [formData, setFormData] = useState<User>(initialValues);
-    //const user: User = GetUserById(id);
     const user: User = GetById<User>(USER_URL, id);
- 
+
     useEffect(() => {
       if(user !== undefined)
       {
-        setFormData(user.data);
+        setFormData(user);
       }
       
     }, [user]);
@@ -42,6 +40,7 @@ export const UserUpdate = () => {
       Update<User>(USER_URL,formData)
         .then(response => {
           history.push("/users");
+          window.location.reload();
         })
         .catch(e => {
           console.log(e);

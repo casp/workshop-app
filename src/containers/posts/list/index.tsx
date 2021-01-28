@@ -11,7 +11,7 @@ export const PostsList = () => {
         <div className="text-right">
             <Button href={"/posts/add"} className="badge badge-success mr-2">Nuevo</Button>
         </div>        
-        <Table striped bordered hover size="sm">
+        <Table striped bordered hover size="sm" responsive>
             <thead>
                 <tr>
                     <th>Title</th>

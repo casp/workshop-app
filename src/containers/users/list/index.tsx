@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { Table, Button } from 'react-bootstrap';
 import { IUserContext } from '../../../contexts/users/IUserContext';
-import { UserContext } from '../../..//contexts/users/UserContext';
-import UserListItem from '../UserListItem';
+import { UserContext } from '../../../contexts/users/UserContext';
+import UserListItem from '../listItem';
 
 export const UsersList = () => {
     const { users } = useContext<IUserContext>(UserContext);
@@ -12,7 +12,7 @@ export const UsersList = () => {
         <div className="text-right">
             <Button href={"/users/add"} className="badge badge-success mr-2">Nuevo</Button>
         </div>        
-        <Table striped bordered hover>
+        <Table striped bordered hover responsive>
             <thead>
                 <tr>
                     <th>Email</th>

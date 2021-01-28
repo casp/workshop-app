@@ -5,10 +5,16 @@ import { Card } from 'react-bootstrap';
 const HusaContent = (props) => {
     const [currentPath, setCurrentPath] = useState<string>('');
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const pathName = (url: string) : string => {
+        const name = url.substr(1, props.location.pathname.length -1).split("/");
+        return name[0];
+    }
+    
     useEffect(() => {
-        const url = props.location.pathname.substr(1, props.location.pathname.length -1);
+        const url = pathName(props.location.pathname);
         setCurrentPath(url);
-    }, [props.location.pathname])
+    }, [pathName, props.location.pathname])
 
     return (
         <Card>

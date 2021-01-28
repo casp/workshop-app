@@ -10,9 +10,9 @@ const UserListItem = (props: UserProps) => {
 
     const deleteUser = (row: number) => {
         Remove(USER_URL, row)
-        .then(response => {
-            console.log(response.data);
+        .then(response => {            
             history.push("/users");
+            window.location.reload();
         })
         .catch(e => {
             console.log(e);

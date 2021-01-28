@@ -1,8 +1,8 @@
 import React from 'react';
 import { Switch, Route } from "react-router-dom";
-import { UsersList } from '../../containers/users/UsersList';
-import { UserAdd } from '../../containers/users/UserAdd';
-import { UserUpdate} from '../../containers/users/UserUpdate';
+import { UsersList } from '../../containers/users/';
+import { UserAdd } from '../../containers/users/';
+import { UserUpdate} from '../../containers/users/';
 import { PostsList } from '../../containers/posts/';
 import { PostAdd } from '../../containers/posts/';
 import { PostUpdate } from '../../containers/posts/';

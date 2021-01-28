@@ -7,10 +7,10 @@ import { HusaRoutes } from '../husaRoutes';
 export const HusaContainer = () => {
     return (      
         <Row>
-          <Col xs={2}>
+          <Col xs={12} md={4} lg={2}>
             <HusaSidebar />
           </Col>
-          <Col>
+          <Col xs={12} md={6} lg={10}>
             <HusaContent >
               <HusaRoutes />
             </HusaContent>

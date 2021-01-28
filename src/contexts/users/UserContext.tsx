@@ -9,7 +9,7 @@ export const UserContext = createContext<IUserContext>({
 });
 
 const UserProvider = (props: any) => {
-  const users = GetAll<User>(USER_URL).data;
+  const users = GetAll<User>(USER_URL);
   return (
     <UserContext.Provider value={{ users }}>
       {props.children}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
+import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import { HusaHeader, HusaContainer, HusaFooter } from './components';
 import { PostContext, UserContext } from './contexts';
 

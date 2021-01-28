@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { User } from '../../../models/User';
 import { Create } from '../../../services/GenericService';
-import { USER_URL } from '../../../resources/';
+import { USER_URL } from '../../../resources';
 
 const initialValues: User = {  
   email: "",
@@ -27,8 +27,9 @@ export const UserAdd = () => {
       e.preventDefault();
       
       Create<User>(USER_URL, formData)
-        .then(response => {
+        .then(response => {          
           history.push("/users");
+          window.location.reload();
         })
         .catch(e => {
           console.log(e);
